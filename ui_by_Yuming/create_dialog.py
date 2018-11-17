@@ -5,7 +5,10 @@
 # Created by: PyQt5 UI code generator 5.11.3
 #
 # WARNING! All changes made in this file will be lost!
-
+import sys
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import QDate, QDateTime , QTime
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -54,8 +57,15 @@ class Ui_Create_Dialog(object):
         self.label_3 = QtWidgets.QLabel(self.widget)
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_2.addWidget(self.label_3)
+
         self.dateTimeEdit = QtWidgets.QDateTimeEdit(self.widget)
         self.dateTimeEdit.setObjectName("dateTimeEdit")
+        # 指定当前日期时间为控件的日期时间
+        nowdatetime = QDateTime.currentDateTime()
+        self.dateTimeEdit.setDateTime(nowdatetime)
+        #设置日期时间格式
+        self.dateTimeEdit.setDisplayFormat("yyyy/MM/dd HH:mm:ss")
+
         self.horizontalLayout_2.addWidget(self.dateTimeEdit)
         self.verticalLayout_3.addLayout(self.horizontalLayout_2)
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
@@ -63,8 +73,14 @@ class Ui_Create_Dialog(object):
         self.label_8 = QtWidgets.QLabel(self.widget)
         self.label_8.setObjectName("label_8")
         self.horizontalLayout_3.addWidget(self.label_8)
+
         self.dateTimeEdit_2 = QtWidgets.QDateTimeEdit(self.widget)
-        self.dateTimeEdit_2.setObjectName("dateTimeEdit_2")
+        self.dateTimeEdit_2.setObjectName("dateTimeEdit")
+        # 指定当前日期时间为控件的日期时间
+        self.dateTimeEdit_2.setDateTime(nowdatetime)
+        # 设置日期时间格式
+        self.dateTimeEdit_2.setDisplayFormat("yyyy/MM/dd HH:mm:ss")
+
         self.horizontalLayout_3.addWidget(self.dateTimeEdit_2)
         self.verticalLayout_3.addLayout(self.horizontalLayout_3)
         self.horizontalLayout_11 = QtWidgets.QHBoxLayout()
@@ -136,8 +152,14 @@ class Ui_Create_Dialog(object):
         self.label_6 = QtWidgets.QLabel(self.widget)
         self.label_6.setObjectName("label_6")
         self.horizontalLayout_9.addWidget(self.label_6)
+
         self.dateTimeEdit_3 = QtWidgets.QDateTimeEdit(self.widget)
-        self.dateTimeEdit_3.setObjectName("dateTimeEdit_3")
+        self.dateTimeEdit_3.setObjectName("dateTimeEdit")
+        # 指定当前日期时间为控件的日期时间
+        self.dateTimeEdit_3.setDateTime(nowdatetime)
+        # 设置日期时间格式
+        self.dateTimeEdit_3.setDisplayFormat("yyyy/MM/dd HH:mm:ss")
+
         self.horizontalLayout_9.addWidget(self.dateTimeEdit_3)
         self.verticalLayout_3.addLayout(self.horizontalLayout_9)
 
