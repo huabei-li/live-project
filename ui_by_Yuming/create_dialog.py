@@ -100,15 +100,25 @@ class Ui_Create_Dialog(object):
         self.horizontalLayout_4.addWidget(self.label_4)
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
+
         self.radioButton = QtWidgets.QRadioButton(self.widget)
         self.radioButton.setObjectName("radioButton")
         self.verticalLayout.addWidget(self.radioButton)
+        #过滤规则提示
+        self.radioButton.setToolTip("这是不过滤")
+
         self.radioButton_2 = QtWidgets.QRadioButton(self.widget)
         self.radioButton_2.setObjectName("radioButton_2")
         self.verticalLayout.addWidget(self.radioButton_2)
+        # 过滤规则提示
+        self.radioButton_2.setToolTip("这是轻度过滤")
+
         self.radioButton_3 = QtWidgets.QRadioButton(self.widget)
         self.radioButton_3.setObjectName("radioButton_3")
         self.verticalLayout.addWidget(self.radioButton_3)
+        # 过滤规则提示
+        self.radioButton_3.setToolTip("这是深度过滤")
+
         self.horizontalLayout_4.addLayout(self.verticalLayout)
         self.verticalLayout_3.addLayout(self.horizontalLayout_4)
         self.horizontalLayout_8 = QtWidgets.QHBoxLayout()
