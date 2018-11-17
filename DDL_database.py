@@ -79,6 +79,48 @@ def select_win(ac_id):
 
     return activity_list
 
+#根据活动状态返回消息,已创建
+def select_status1():
+    import sqlite3
+    con = sqlite3.connect('alpha.sqlite')
+    c = con.cursor()
+    cursor = c.execute("select ac_name, keyword, wenan, start_time, end_time, show_time from Activity where status=1")
+    activity_list = []
+    for item in cursor:
+        activity_list.append(item)
+    con.close()
+
+    return activity_list
+
+
+#根据活动状态返回消息,已发布
+def select_status2():
+    import sqlite3
+    con = sqlite3.connect('alpha.sqlite')
+    c = con.cursor()
+    cursor = c.execute("select ac_name, keyword, wenan, start_time, end_time, show_time from Activity where status=2")
+    activity_list = []
+    for item in cursor:
+        activity_list.append(item)
+    con.close()
+
+    return activity_list
+
+
+#根据活动状态返回消息,已开奖
+def select_status3():
+    import sqlite3
+    con = sqlite3.connect('alpha.sqlite')
+    c = con.cursor()
+    cursor = c.execute("select ac_name, keyword, wenan, start_time, end_time, show_time from Activity where status=3")
+    activity_list = []
+    for item in cursor:
+        activity_list.append(item)
+    con.close()
+
+    return activity_list
+
+
 
 #删除某活动，传入活动id（活动插入时间）
 def delete_activity(ac_id):
