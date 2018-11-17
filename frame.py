@@ -96,12 +96,12 @@ if __name__ == '__main__':
 
     from PyQt5.QtWidgets import QApplication
 
+    style = open(r"C:\Users\wangq\Documents\课件\docu.18-01\软工实践\MetroUI.qss","r",encoding='utf-8')
+    style_str = style.read()
+    #style_str = style_str.decode('utf-8')
     app = QApplication(sys.argv)
-
-    #app.setStyleSheet(Stylesheet)
+    app.setStyleSheet(style_str)
 
     w = LeftTabWidget()
-
     w.show()
-
     sys.exit(app.exec_())
