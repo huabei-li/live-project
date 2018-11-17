@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'create.ui'
+# Form implementation generated from reading ui file 'create_dialog.ui'
 #
 # Created by: PyQt5 UI code generator 5.11.3
 #
@@ -8,21 +8,18 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(620, 600)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
-        self.centralwidget.setObjectName("centralwidget")
-        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(491, 550, 75, 23))
+class Ui_Create_Dialog(object):
+    def setupUi(self, Create_Dialog):
+        Create_Dialog.setObjectName("Create_Dialog")
+        Create_Dialog.resize(620, 600)
+        self.pushButton_2 = QtWidgets.QPushButton(Create_Dialog)
+        self.pushButton_2.setGeometry(QtCore.QRect(491, 560, 75, 23))
         self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(410, 550, 75, 23))
+        self.pushButton = QtWidgets.QPushButton(Create_Dialog)
+        self.pushButton.setGeometry(QtCore.QRect(410, 560, 75, 23))
         self.pushButton.setObjectName("pushButton")
-        self.layoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget.setGeometry(QtCore.QRect(150, 20, 301, 514))
+        self.layoutWidget = QtWidgets.QWidget(Create_Dialog)
+        self.layoutWidget.setGeometry(QtCore.QRect(150, 30, 301, 514))
         self.layoutWidget.setObjectName("layoutWidget")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.layoutWidget)
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
@@ -135,41 +132,36 @@ class Ui_MainWindow(object):
         self.dateTimeEdit_3.setObjectName("dateTimeEdit_3")
         self.horizontalLayout_9.addWidget(self.dateTimeEdit_3)
         self.verticalLayout_4.addLayout(self.horizontalLayout_9)
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(Create_Dialog)
+        QtCore.QMetaObject.connectSlotsByName(Create_Dialog)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, Create_Dialog):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "抽奖助手-创建抽奖"))
-        self.pushButton_2.setText(_translate("MainWindow", "取消"))
-        self.pushButton.setText(_translate("MainWindow", "创建"))
-        self.label.setText(_translate("MainWindow", "活动名称"))
-        self.label_7.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\">活动文案</p></body></html>"))
-        self.label_2.setText(_translate("MainWindow", "关键词"))
-        self.label_3.setText(_translate("MainWindow", "抽奖开始时间"))
-        self.label_8.setText(_translate("MainWindow", "抽奖结束时间"))
-        self.label_4.setText(_translate("MainWindow", "过滤规则"))
-        self.radioButton.setText(_translate("MainWindow", "不过滤"))
-        self.radioButton_2.setText(_translate("MainWindow", "轻度过滤"))
-        self.radioButton_3.setText(_translate("MainWindow", "深度过滤"))
-        self.label_5.setText(_translate("MainWindow", "奖品设置"))
-        self.label_9.setText(_translate("MainWindow", "一等奖人数"))
-        self.label_10.setText(_translate("MainWindow", "二等奖人数"))
-        self.label_11.setText(_translate("MainWindow", "三等奖人数"))
-        self.label_6.setText(_translate("MainWindow", "结果公布时间"))
-
+        Create_Dialog.setWindowTitle(_translate("Create_Dialog", "创建新抽奖"))
+        self.pushButton_2.setText(_translate("Create_Dialog", "取消"))
+        self.pushButton.setText(_translate("Create_Dialog", "创建"))
+        self.label.setText(_translate("Create_Dialog", "活动名称"))
+        self.label_7.setText(_translate("Create_Dialog", "<html><head/><body><p align=\"center\">活动文案</p></body></html>"))
+        self.label_2.setText(_translate("Create_Dialog", "关键词"))
+        self.label_3.setText(_translate("Create_Dialog", "抽奖开始时间"))
+        self.label_8.setText(_translate("Create_Dialog", "抽奖结束时间"))
+        self.label_4.setText(_translate("Create_Dialog", "过滤规则"))
+        self.radioButton.setText(_translate("Create_Dialog", "不过滤"))
+        self.radioButton_2.setText(_translate("Create_Dialog", "轻度过滤"))
+        self.radioButton_3.setText(_translate("Create_Dialog", "深度过滤"))
+        self.label_5.setText(_translate("Create_Dialog", "奖品设置"))
+        self.label_9.setText(_translate("Create_Dialog", "一等奖人数"))
+        self.label_10.setText(_translate("Create_Dialog", "二等奖人数"))
+        self.label_11.setText(_translate("Create_Dialog", "三等奖人数"))
+        self.label_6.setText(_translate("Create_Dialog", "结果公布时间"))
 
 if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
+    Create_Dialog = QtWidgets.QDialog()
+    ui = Ui_Create_Dialog()
+    ui.setupUi(Create_Dialog)
+    Create_Dialog.show()
     sys.exit(app.exec_())
