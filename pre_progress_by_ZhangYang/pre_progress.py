@@ -7,16 +7,8 @@ import time
 TXT_PATH = 'record.txt'
 SAVE_PATH = 'result.txt'
 KEY = '我支持调课'
-STIME = ''
-ETIME = ''
-
-
-RESULT_LIST = []        # 结果
-QQ_OR_EMAIL_LIST = []            # 已存在的QQ
-
-
-test_string = "2018-08-20 16:45:49 雨勤未晴丶(275922122)"
-test_string2 = "#我要换组#、#我要红包#、#我支持调课#管理员开启了全员禁言，只有群主和管理员才能发言"
+STIME = '20180821000000'
+ETIME = '20180831000000'
 
 def get_timestring(string):
     '''
@@ -103,8 +95,7 @@ def get_key_list(string):
 def format_time(timestring):
     '''
     格式化日期字符串 时间字符串 统一为20181010235900的形式
-    :param datestring: 日期字符串
-    :param timestring: 时间字符串
+    :param timestring: 时间字符串 形如2018-10-10 23:59:00
     :return: 20181010235900形式的字符串
     '''
     time_struct = time.strptime(timestring, "%Y-%m-%d %H:%M:%S")
@@ -112,20 +103,42 @@ def format_time(timestring):
     return result_string
 
 
-def pre_process(path, setkey, stime, etime, save_path):
+def time_judge(current_time, start_time, end_time):
+    '''
+    判断当前时间是否在时间段内
+    :param current_time: 当前时间
+    :param start_time: 时间段开始时间
+    :param end_time: 时间段结束时间
+    :return: True or False
+    '''
+    i_current_time = int(current_time)
+    i_start_time = int(start_time)
+    i_end_time = int(end_time)
+
+    if i_start_time <= i_current_time and i_current_time <= i_end_time:
+        return True
+
+    return False
+
+
+def pre_process(path, setkey, start_time, end_time, save_path):
     '''
     预处理函数
     :param path: 聊天记录文本的路径
     :param setkey: 本次活动设置的关键词
-    :param stime: 开始时间 以20181010235900的形式传入
-    :param etime: 结束时间 以20181010235900的形式传入
+    :param start_time: 开始时间 以20181010235900的形式传入
+    :param end_time: 结束时间 以20181010235900的形式传入
     :param save_path: 结果保存的路径
     :return:
     '''
+
+    result_list = []        # 结果
+    qq_or_email_list = []  # 已存在的QQ
+
     with open(path, encoding='utf-8') as f:
 
-        # exist为1时表示该QQ or Email已经被标记为参与了抽奖 不再次插入
-        exist = 0
+        # should_skip为1时表示该QQ or Email已经被标记为参与了抽奖 不再次插入
+        should_skip = False
         # QQ或者Email
         qq_or_email = None
         # 昵称
@@ -136,15 +149,21 @@ def pre_process(path, setkey, stime, etime, save_path):
             # 获取时间和日期
             timestring = get_timestring(line)
             if timestring:
-                # print([timestring, format_time(timestring)])
-                exist = 0
+                formated_time = format_time(timestring)
+                if not time_judge(formated_time, start_time, end_time):
+                    should_skip = True
+                    # print("[-]{}被跳过".format(timestring))
+                    continue
+
+                # print("[+]{}被考虑".format(timestring))
+                should_skip = False
                 qq_or_email = get_qq_or_email(line)
                 nick = get_nick(line)
-                if qq_or_email in QQ_OR_EMAIL_LIST:
-                    exist = 1
+                if qq_or_email in qq_or_email_list:
+                    should_skip = True
             else:
                 # 如果已存在 跳过即可
-                if exist:
+                if should_skip:
                     continue
                 # 获取该行的关键词
                 key_list = get_key_list(line)
@@ -152,18 +171,18 @@ def pre_process(path, setkey, stime, etime, save_path):
                 # 遍历查找出的每一个关键词
                 for key in key_list:
                     if key == setkey:
-                        RESULT_LIST.append([qq_or_email, nick, 1])
-                        QQ_OR_EMAIL_LIST.append(qq_or_email)
-                        exist = 1
+                        result_list.append([qq_or_email, nick, 1])
+                        qq_or_email_list.append(qq_or_email)
+                        should_skip = True
                         break
 
-                
-
+    # 保存结果
+    with open(save_path, 'w', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        for row in result_list:
+            writer.writerow(row)
+    print('[+]保存成功{}'.format(save_path))
 
 
 if __name__ == "__main__":
-    pre_process(TXT_PATH, KEY, 0, 0, 0)
-    print('--------------')
-    for result in RESULT_LIST:
-        print('++++')
-        print(result)
+    pre_process(TXT_PATH, KEY, STIME, ETIME, SAVE_PATH)
