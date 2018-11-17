@@ -1,38 +1,26 @@
 # -*- coding: utf-8 -*-
 import sys
-import sqlite3
-import random
-import http.client
-import urllib
-import hashlib
-import datetime
-import re
-import createdtable
-import Created
+import scrolled
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QWidget
-from PyQt5.QtWidgets import QDialog
-from DDL_database import select_status2
 from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtCore import QDate, QDateTime, QTime
+from DDL_database import select_status2
 
 
-class Create_activ(QDialog, createdtable.Ui_Created):
+class Generate_activ(QWidget, scrolled.Ui_Form):
 
     def __init__(self, parent=None):
-        super(Create_activ, self).__init__(parent)
+        super(Generate_activ, self).__init__(parent)
+        self.ui = scrolled.Ui_Form()
         # 这两句坑死人
         self.setupUi(self)
         self.retranslateUi(self)
 
-        self.width = 31
-        self.hight = 581
-        self.iterator()
+        self.width=31
+        self.hight=581
 
-        # qt的信号槽机制，连接按钮的点击事件和相应的方法
-        self.pushButton.clicked.connect(lambda: self.create_button())
-        self.pushButton_2.clicked.connect(lambda: self.delete_button())
-        self.pushButton_3.clicked.connect(lambda: self.publish_button())
+        self.iterator()
 
     def iterator(self):
         i = 0
@@ -40,10 +28,10 @@ class Create_activ(QDialog, createdtable.Ui_Created):
         for name_key in activity_list:
             self.activity_name = name_key[0]
             self.activity_keyword = name_key[1]
-            self.generate(i * 31, self.activity_name, self.activity_keyword)
-            i = i + 1
+            self.generate(i*31,self.activity_name, self.activity_keyword)
+            i=i+1
 
-    def generate(self, po, a_name, a_keyword):
+    def generate(self,po, a_name, a_keyword):
         self.widget = QtWidgets.QWidget(self.scrollAreaWidgetContents)
         self.widget.setGeometry(QtCore.QRect(0, po, self.hight, self.width))
         self.widget.setObjectName("widget")
@@ -72,23 +60,12 @@ class Create_activ(QDialog, createdtable.Ui_Created):
         self.label_12.setText("关键词")
         self.pushButton_3.setText("查看")
 
-    def create_button(self):
-        Create_Dialog = QtWidgets.QDialog()
-        ui = Created.Create_activ()
-        ui.setupUi(Create_Dialog)
-        ui.pushButton.clicked.connect(lambda: ui.ok())
-        Create_Dialog.show()
-        Create_Dialog.exec_()
-
-    def delete_button(self):
-        print("delete")
-
-    def publish_button(self):
-        print("publish")
+    def click(self):
+        pass
 
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    ui = Create_activ()
+    ui = Generate_activ()
     ui.show()
     sys.exit(app.exec_())

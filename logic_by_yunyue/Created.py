@@ -1,14 +1,8 @@
 # -*- coding: utf-8 -*-
 import sys
-import sqlite3
-import random
-import http.client
-import urllib
-import hashlib
 import datetime
-import re
 import create_dialog
-from insert_activity_by_lixiang import insert_act
+from DDL_database import insert_act
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtCore import QCoreApplication

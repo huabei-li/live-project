@@ -27,9 +27,14 @@ class Ui_Created(object):
         self.label.setFont(font)
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
-        self.tableView = QtWidgets.QTableView(self.layoutWidget)
-        self.tableView.setObjectName("tableView")
-        self.verticalLayout.addWidget(self.tableView)
+        self.scrollArea = QtWidgets.QScrollArea(self.layoutWidget)
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 574, 495))
+        self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents_2)
+        self.verticalLayout.addWidget(self.scrollArea)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -48,7 +53,6 @@ class Ui_Created(object):
         self.retranslateUi(Created)
         QtCore.QMetaObject.connectSlotsByName(Created)
 
-
     def retranslateUi(self, Created):
         _translate = QtCore.QCoreApplication.translate
         Created.setWindowTitle(_translate("Created", "抽奖助手-已创建抽奖列表"))
@@ -57,12 +61,3 @@ class Ui_Created(object):
         self.pushButton_2.setText(_translate("Created", "删除"))
         self.pushButton_3.setText(_translate("Created", "发布"))
 
-if __name__ == "__main__":
-    import sys
-
-    app = QtWidgets.QApplication(sys.argv)
-    Created = QtWidgets.QMainWindow()
-    ui = Ui_Created()
-    ui.setupUi(Created)
-    Created.show()
-    sys.exit(app.exec_())
