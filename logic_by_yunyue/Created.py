@@ -7,37 +7,45 @@ import urllib
 import hashlib
 import datetime
 import re
-from PyQt5 import QtWidgets
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from create import Ui_MainWindow
+import create_dialog
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QDialog
+from PyQt5.QtCore import QDate, QDateTime , QTime
 
 
-class Create_activ(Ui_MainWindow):
-    def __init__(self):
-        super(Ui_MainWindow, self).__init__()
+
+class Create_activ(QDialog,create_dialog.Ui_Create_Dialog):
+
+    def __init__(self, parent=None):
+        super(Create_activ, self).__init__(parent)
+        # 这两句坑死人
+        self.setupUi(self)
+        self.retranslateUi(self)
+
+
+        # qt的信号槽机制，连接按钮的点击事件和相应的方法
         self.pushButton.clicked.connect(lambda: self.ok())
         self.pushButton_2.clicked.connect(lambda: self.cancel())
 
     def ok(self):
-        self.name = self.lineEdit.text()  # 活动名称
-        self.text = self.textEdit.toPlainText()  # 文案
-        self.keyword = self.lineEdit_2.text()  # 关键词
-        self.starttime = self.dateTimeEdit.date()  # 开始时间
-        self.stoptime = self.dateTimeEdit_2.date()  # 结束时间
-        self.rule1 = self.radioButton.isChecked()
-        self.rule2 = self.radioButton_2.isChecked()
-        self.rule3 = self.radioButton_3.isChecked()
-        self.first_prize = self.spinBox.Value()
-        self.second_prize = self.spinBox_2.text()
-        self.third_prize = self.spinBox_3.text()
-        self.publishtime = self.dateTimeEdit_3.date()  # 公布时间
+        # 获取信息
+        name = self.lineEdit.text()  # 活动名称
+        text = self.textEdit.toPlainText()  # 文案
+        keyword = self.lineEdit_2.text()  # 关键词
+        start_datatime = self.dateTimeEdit.dateTime().toString("yyyyMMddhhmmss")  # 开始时间
+        stopt_datatime = self.dateTimeEdit_2.dateTime().toString("yyyyMMddhhmmss")  # 结束时间
+        rule1 = self.radioButton.isChecked()
+        rule2 = self.radioButton_2.isChecked()
+        rule3 = self.radioButton_3.isChecked()
+        first_prize = self.spinBox.value()
+        second_prize = self.spinBox_2.value()
+        third_prize = self.spinBox_3.value()
+        publish_datatime = self.dateTimeEdit_3.dateTime().toString("yyyyMMddhhmmss")  # 公布时间
+        print(publish_datatime)
 
-        print(self.name)
-        pass
 
     def cancel(self):
-        pass
+        print("cancel")
 
 
 if __name__ == "__main__":
