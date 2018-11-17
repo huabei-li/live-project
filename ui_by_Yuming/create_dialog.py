@@ -174,6 +174,7 @@ class Ui_Create_Dialog(object):
         self.verticalLayout_3.addLayout(self.horizontalLayout_9)
 
         self.retranslateUi(Create_Dialog)
+        self.pushButton_2.clicked.connect(Create_Dialog.close)
         QtCore.QMetaObject.connectSlotsByName(Create_Dialog)
 
     def retranslateUi(self, Create_Dialog):
