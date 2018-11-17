@@ -2,6 +2,7 @@ import os
 import csv
 import re
 from datetime import datetime
+import time
 
 TXT_PATH = 'record.txt'
 SAVE_PATH = 'result.txt'
@@ -17,24 +18,13 @@ QQ_OR_EMAIL_LIST = []            # 已存在的QQ
 test_string = "2018-08-20 16:45:49 雨勤未晴丶(275922122)"
 test_string2 = "#我要换组#、#我要红包#、#我支持调课#管理员开启了全员禁言，只有群主和管理员才能发言"
 
-def get_date(string):
+def get_timestring(string):
     '''
-    以字符串形式返回日期
-    :param string: 待查找的字符串
+    查找字符串中的时间
+    :param string:
     :return:
     '''
-    mat = re.search(r"(\d{4}-\d{1,2}-\d{1,2})", string)
-    if mat:
-        return mat.groups()[0]
-    return None
-
-def get_time(string):
-    '''
-    以字符串的形式返回时间
-    :param string: 待查找的字符串
-    :return:
-    '''
-    mat = re.search(r"(\d{1,2}:\d{1,2}:\d{1,2})", string)
+    mat = re.search(r"(\d{4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}:\d{1,2})", string)
     if mat:
         return mat.groups()[0]
     return None
@@ -51,6 +41,7 @@ def get_nick(string):
     if left_pos == 20:
         return '无名*'
     return string[20:left_pos]
+
 
 def get_qq_or_email(string):
     '''
@@ -109,6 +100,18 @@ def get_key_list(string):
     return key_list
 
 
+def format_time(timestring):
+    '''
+    格式化日期字符串 时间字符串 统一为20181010235900的形式
+    :param datestring: 日期字符串
+    :param timestring: 时间字符串
+    :return: 20181010235900形式的字符串
+    '''
+    time_struct = time.strptime(timestring, "%Y-%m-%d %H:%M:%S")
+    result_string = time.strftime("%Y%m%d%H%M%S", time_struct)
+    return result_string
+
+
 def pre_process(path, setkey, stime, etime, save_path):
     '''
     预处理函数
@@ -131,9 +134,9 @@ def pre_process(path, setkey, stime, etime, save_path):
         # 遍历聊天记录中的每一行
         for line in f.readlines():
             # 获取时间和日期
-            date = get_date(line)
-            time = get_time(line)
-            if date and time:
+            timestring = get_timestring(line)
+            if timestring:
+                # print([timestring, format_time(timestring)])
                 exist = 0
                 qq_or_email = get_qq_or_email(line)
                 nick = get_nick(line)
